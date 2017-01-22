@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sed -i.bak s/-CFLAGS/$2/g Makefile
+make CC=$1
+cp examples/doge ../$4/doge.$3
+make clean
+sed -i.bak s/$2/-CFLAGS/g Makefile
