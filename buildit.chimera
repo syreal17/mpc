@@ -4,9 +4,11 @@ cflags="${cflags%\"}"
 cflags="${cflags#\"}"
 
 cd src_corpora/mpc
-sed -i.bak s/-CFLAGS/$cflags/g Makefile
-make CC=$1
-cp examples/doge ../$4/doge.$3
+#sed -i.bak s/-CFLAGS/$cflags/g Makefile
+make CC=$1 CFLAGS="$cflags -ansi -pedantic -Wall -Wextra -Wformat=2 -Wshadow -Wno-long-long -Wno-overlength-strings -Wno-format-nonliteral -Wcast-align -Wwrite-strings -Wstrict-prototypes -Wold-style-definition -Wredundant-decls -Wnested-externs -Wmissing-include-dirs -Wswitch-default"
+#cp examples/doge ../$4/doge.$3
+install -D examples/doge -m 644 -t ../../$4/
+mv ../../$4/doge ../../$4/doge.$3
 make clean
-sed -i.bak s/$clags/-CFLAGS/g Makefile
+#sed -i.bak s/$clags/-CFLAGS/g Makefile
 cd ../..
